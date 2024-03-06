@@ -1,0 +1,22 @@
+<div id="<%= dom_id booking %>" class="card">
+  <div class="card-header d-flex justify-content-between p-4">
+    <p>
+      <strong>Flight:</strong>
+      <%= booking.flight.flight_number %>
+    </p>
+
+
+    <p>
+      <strong>Passenger name:</strong>
+      <%= booking.passenger_name %>
+    </p>
+
+    <p>
+      <strong>Seat number:</strong>
+      <%= booking.seat_number %>
+    </p>
+    <%= button_to "Cancel booking", booking, method: :delete, class:"btn btn-danger btn-sm" %>
+
+  </div>
+
+</div>
