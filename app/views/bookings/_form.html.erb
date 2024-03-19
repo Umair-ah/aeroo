@@ -1,34 +1,54 @@
-<%= form_with(model: booking) do |form| %>
-  <% if booking.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with(model: booking) do |form| %>
+        <% if booking.errors.any? %>
+          <div class="alert alert-danger">
+            <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
 
-      <ul>
-        <% booking.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% booking.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-group">
+          <%= form.label :flight_id %>
+          <%= form.collection_select :flight_id, Flight.order(:flight_number), :id, :flight_number, { prompt: "Select Flight" }, { class: "form-control" } %>
+        </div>
+
+        <%= form.hidden_field :user_id, value: current_user.id %>
+
+        <div class="form-group">
+          <%= form.label :passenger_name %>
+          <%= form.text_field :passenger_name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :seat_number %>
+          <%= form.select :seat_number, (1..50).map { |num| ["#{num}A", "#{num}B"] }, { prompt: "Select Seat" }, { class: "form-control" } %>
+
+        </div>
+
+        <div class="form-group">
+          <%= form.submit "Submit", class: "btn btn-primary mb-5" %>
+        </div>
+      <% end %>
+      <% Flight.all.each do |flight| %>
+        <div class="d-flex align-items-center justify-content-between gap-3">
+
+              
+            <%= flight.flight_number %>
+            <%= flight.departure_airport %>
+            <%= flight.destination_airport %>
+
+        </div>
+
+      <% end %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :flight_id, style: "display: block" %>
-    <%= form.collection_select :flight_id, Flight.order(:flight_number), :id, :flight_number %>
   </div>
+</div>
 
-  <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <div>
-    <%= form.label :passenger_name, style: "display: block" %>
-    <%= form.text_field :passenger_name %>
-  </div>
-
-  <div>
-    <%= form.label :seat_number, style: "display: block" %>
-    <%= form.select :seat_number, options_for_select(['1A','1B','2A','2B','4A','4B','7A','7B']) %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>

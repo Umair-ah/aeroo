@@ -1,0 +1,28 @@
+<div class="d-flex align-items-center justify-content-around my-5">
+  <%= link_to "New Flight", new_flight_path, class:"btn btn-danger" %>
+  <%= button_to "Sign Out", destroy_admin_session_path, method: :delete, class:"btn btn-warning" %>
+</div>
+<hr>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Flight No.</th>
+      <th scope="col">Departure</th>
+      <th scope="col">Destination</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @flights.each do |flight| %>
+      <tr>
+        <th scope="row"><%= flight.id %></th>
+        <td><%= flight.flight_number %></td>
+        <td><%= flight.departure_airport %></td>
+        <td><%= flight.destination_airport %></td>
+        <td><%= link_to "Edit", edit_flight_path(flight), class:"btn btn-sm btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

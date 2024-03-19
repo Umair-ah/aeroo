@@ -15,3 +15,5 @@ flights_data = [
 flights_data.each do |flight|
   Flight.create(flight)
 end
+
+Admin.create(email:"admin@test.com", password:"admin123", password_confirmation:"admin123")

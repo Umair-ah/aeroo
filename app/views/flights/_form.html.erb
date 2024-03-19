@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with(model: @flight, html: { class: "form-horizontal" }) do |f| %>
+        <div class="form-group">
+          <%= f.label :flight_number, class: "col-sm-4 control-label" %>
+          <div class="col-sm-8">
+            <%= f.text_field :flight_number, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :departure_airport, class: "col-sm-4 control-label" %>
+          <div class="col-sm-8">
+            <%= f.text_field :departure_airport, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :destination_airport, class: "col-sm-4 control-label" %>
+          <div class="col-sm-8">
+            <%= f.text_field :destination_airport, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-8">
+            <%= f.submit "Submit", class: "btn btn-primary mb-4" %>
+          </div>
+        </div>
+      <% end %>
+      <%= link_to "back", flights_path, class:"my-3" %>
+    </div>
+  </div>
+</div>
